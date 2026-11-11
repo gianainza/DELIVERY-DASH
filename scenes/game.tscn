@@ -7,13 +7,32 @@
 [ext_resource type="Texture2D" uid="uid://xdwj6plgsb5c" path="res://art/environmental props/shop.png" id="5_ca42v"]
 [ext_resource type="Texture2D" uid="uid://dk48dbqb7iyap" path="res://art/environmental props/cone1.png" id="6_rysoc"]
 [ext_resource type="Texture2D" uid="uid://cvfixslj0ckik" path="res://art/environmental props/cone3.png" id="7_ssvqc"]
+[ext_resource type="Script" uid="uid://byklr52ulcw6w" path="res://scripts/location_area.gd" id="7_sww3w"]
 [ext_resource type="Texture2D" uid="uid://chl7b0skg2g17" path="res://art/environmental props/Mailbox.png" id="8_264po"]
 [ext_resource type="Texture2D" uid="uid://dveiw4padq1a2" path="res://art/environmental props/Car1.png" id="9_1kice"]
 [ext_resource type="Texture2D" uid="uid://dkbw2dh8ixyxr" path="res://art/environmental props/tree1.png" id="10_5newe"]
 [ext_resource type="Texture2D" uid="uid://dce2yo47kl8qa" path="res://art/environmental props/tree2.png" id="11_37s47"]
 [ext_resource type="Texture2D" uid="uid://dna1phcy7lxd7" path="res://art/environmental props/tree3.png" id="12_bt5mj"]
 [ext_resource type="Texture2D" uid="uid://bxg6g8gddv3l5" path="res://art/environmental props/lamp post.png" id="13_e1j6l"]
+[ext_resource type="Script" uid="uid://dq1pr6utsohjv" path="res://scripts/hud.gd" id="14_264po"]
 [ext_resource type="Texture2D" uid="uid://bu02xpdohb5i" path="res://art/HUD/delivery box frame.png" id="14_trtic"]
+[ext_resource type="Texture2D" uid="uid://wlbxeixilnr" path="res://art/HUD/timer frame .png" id="15_ir15t"]
+[ext_resource type="Texture2D" uid="uid://sq0xqroxfitm" path="res://art/HUD/idle phone.png" id="17_1kice"]
+[ext_resource type="FontFile" uid="uid://luhhwhfklol7" path="res://art/VCR_OSD_MONO_1.001.ttf" id="17_qnb83"]
+[ext_resource type="Texture2D" uid="uid://dyqpdb701q1pk" path="res://art/HUD/vibrating phone.png" id="18_5newe"]
+[ext_resource type="Texture2D" uid="uid://0f3lm82clgj5" path="res://art/HUD/full star.png" id="19_37s47"]
+[ext_resource type="Script" uid="uid://dl7rpasapuvp8" path="res://scripts/parked_bike.gd" id="20_5newe"]
+[ext_resource type="Texture2D" uid="uid://e0k40anmsq81" path="res://art/HUD/phone ui.png" id="20_e1j6l"]
+[ext_resource type="Texture2D" uid="uid://cspd01nsefhhj" path="res://art/player movement/ParkedBike-1.png.png" id="21_37s47"]
+[ext_resource type="PackedScene" uid="uid://bxv57wfql2yad" path="res://scenes/player.tscn" id="22_37s47"]
+[ext_resource type="Script" uid="uid://c18f6o02vdxxm" path="res://scripts/delivery_manager.gd" id="23_bt5mj"]
+[ext_resource type="Script" uid="uid://dwv2gw7f0ggs" path="res://scripts/world_life.gd" id="99_wlife"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6vjhb"]
+size = Vector2(279.33533, 349.90118)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ubcx"]
+size = Vector2(553.9409, 380.71707)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6vjhb"]
 bg_color = Color(0.2901961, 0.6, 0.6, 1)
@@ -25,11 +44,58 @@ border_width_bottom = 2
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w20yl"]
 bg_color = Color(1, 1, 1, 1)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_bt5mj"]
+atlas = ExtResource("17_1kice")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e1j6l"]
+atlas = ExtResource("18_5newe")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pl11u"]
+atlas = ExtResource("18_5newe")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bhx41"]
+atlas = ExtResource("18_5newe")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8ubcx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bt5mj")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e1j6l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pl11u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bhx41")
+}],
+"loop": 1,
+"name": &"vibrating",
+"speed": 12.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qnb83"]
+height = 49.94409
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hoswr"]
+size = Vector2(45.000004, 20)
+
 [node name="Game" type="Node2D" unique_id=501333407]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1320653001]
-position = Vector2(-7, -3)
-scale = Vector2(2.1023965, 1.8912282)
+position = Vector2(1.0000004, 2.0000005)
+scale = Vector2(2.0958605, 1.8719298)
 texture = ExtResource("1_uwrxv")
 centered = false
 
@@ -40,8 +106,15 @@ position = Vector2(1437.5, 344)
 scale = Vector2(0.60142857, 0.5287206)
 texture = ExtResource("2_kvuet")
 
+[node name="DropoffArea" type="Area2D" parent="EnvironmentProps/house1" unique_id=277496018]
+position = Vector2(-4.1569824, -34.044434)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentProps/house1/DropoffArea" unique_id=688022258]
+position = Vector2(8.313477, 6.619751)
+shape = SubResource("RectangleShape2D_6vjhb")
+
 [node name="house2" type="Sprite2D" parent="EnvironmentProps" unique_id=256866976]
-position = Vector2(474.8393, 677.00006)
+position = Vector2(485.83932, 672.00006)
 scale = Vector2(0.7993572, 0.61936027)
 texture = ExtResource("3_trtic")
 
@@ -56,6 +129,13 @@ position = Vector2(956.27386, 547.00214)
 rotation = 3.1386876
 scale = Vector2(0.39493862, 0.39746535)
 texture = ExtResource("5_ca42v")
+
+[node name="ShopArea" type="Area2D" parent="EnvironmentProps/shop" unique_id=773828193]
+script = ExtResource("7_sww3w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentProps/shop/ShopArea" unique_id=1373398012]
+position = Vector2(-0.2355957, -24.292236)
+shape = SubResource("RectangleShape2D_8ubcx")
 
 [node name="cone1" type="Sprite2D" parent="EnvironmentProps" unique_id=222808780]
 position = Vector2(919.3003, 1016.60046)
@@ -264,160 +344,396 @@ rotation = 0.004500985
 scale = Vector2(0.05060121, 0.07059292)
 texture = ExtResource("13_e1j6l")
 
-[node name="WorldCollisions" type="StaticBody2D" parent="." unique_id=1874802439]
+[node name="WorldCollisions" type="StaticBody2D" parent="." unique_id=544657434]
 
-[node name="house1" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=159709426]
-position = Vector2(342, 752)
-polygon = PackedVector2Array(-5, -8, 3, -200, 267, -203, 263, -59, 150, -62, 151, 13, -1, 15)
+[node name="house1" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=256009267]
+position = Vector2(470.748, 636.7515)
+polygon = PackedVector2Array(-115.747986, -86.751526, 146.25201, -86.751526, 148.25201, 36.248474, 33.252014, 37.248474, 34.252014, 122.248474, -118.747986, 120.248474)
 
-[node name="house2" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=1521322415]
+[node name="trees8" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=2040189476]
+position = Vector2(1076, 831)
+scale = Vector2(0.053757112, 0.057111286)
+polygon = PackedVector2Array(-93.01172, -192.60645, 148.8164, -175.09668, 241.82813, -17.509766, 241.82813, 140.07715, 167.41992, 262.6455, -55.80664, 262.6455, -167.41992, 210.11621, -223.22656, 70.03906, -204.625, -70.03906)
+
+[node name="house2" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=384291717]
 position = Vector2(1365, 238)
-polygon = PackedVector2Array(0, -5, -2, 177, 152, 175, 148, 1)
+polygon = PackedVector2Array(-3, 5, 151, 5, 150, 177, -5, 177)
 
-[node name="house3" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=1931409261]
+[node name="house3" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=1437760445]
 position = Vector2(1535, 671)
 polygon = PackedVector2Array(-1, -3, -153, -1, -153, 130, -1, 138, 40, 68)
 
-[node name="shop" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=1217262066]
+[node name="shop" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=700642269]
 position = Vector2(851, 487)
 polygon = PackedVector2Array(8, 1, 209, -6, 209, 138, -3, 138)
 
-[node name="pond" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=44128277]
+[node name="pond" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=1016651155]
 position = Vector2(1910, 909)
 polygon = PackedVector2Array(-9, 5, -84, 20, -149, 85, -192, 110, -320, 132, -365, 160, 1, 155)
 
-[node name="cones" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=1533042579]
+[node name="cones" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=1037052575]
 position = Vector2(907, 1010)
 polygon = PackedVector2Array(-5, -1, 100, 1, 106, 27, -3, 20)
 
-[node name="pedxing" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=330643914]
+[node name="pedxing" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=1646141971]
 position = Vector2(812, 199)
-polygon = PackedVector2Array(-1, -7, 79, -7, 77, 113, -7, 126)
+polygon = PackedVector2Array(1, -7, 78, -6, 91, 2, 92, 121, 80, 133, -1, 130, -11, 122, -10, 2)
 
-[node name="trees" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=1136352712]
-position = Vector2(156, 154)
-polygon = PackedVector2Array(0, -7, 62, 23, 68, 81, 21, 111, -22, 64, -20, 4)
+[node name="trees" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=442886547]
+position = Vector2(162, 151)
+scale = Vector2(1.0486112, 1.098517)
+polygon = PackedVector2Array(6.6754913, 10.013504, 31.4702, 13.65477, 54.357605, 27.309555, 59.125824, 42.784958, 60.079468, 64.6326, 51.49669, 89.2112, 28.609268, 96.493744, 6.6754913, 99.224686, -14.304642, 80.10802, -24.794708, 57.35005, -20.980133, 30.95082, -5.721863, 17.296051)
 
-[node name="trees2" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=509592078]
+[node name="trees2" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=1028817774]
 position = Vector2(553, 169)
-polygon = PackedVector2Array(0, -7, 62, 23, 68, 81, 21, 111, -22, 64, -20, 4)
+polygon = PackedVector2Array(13, 1, 39, 4, 58, 17, 67, 36, 67, 60, 60, 80, 36, 92, 1, 90, -18, 63, -18, 43, -12, 15)
 
-[node name="trees3" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=1372722879]
+[node name="trees3" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=2068379683]
 position = Vector2(54, 954)
 polygon = PackedVector2Array(0, -7, 62, 23, 68, 81, 21, 111, -22, 64, -20, 4)
 
-[node name="trees4" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=1599570662]
+[node name="trees4" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=810766029]
 position = Vector2(1272, 236)
-polygon = PackedVector2Array(0, -7, 62, 23, 68, 81, 21, 111, -22, 64, -20, 4)
+polygon = PackedVector2Array(10, 3, 36, 12, 58, 24, 65, 37, 61, 47, 64, 61, 52, 83, 42, 95, 29, 102, 15, 99, 3, 95, -9, 89, -19, 76, -23, 51, -21, 33, -16, 21, -4, 13)
 
-[node name="trees5" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=220344061]
+[node name="trees5" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=404919838]
 position = Vector2(1844, 47)
 polygon = PackedVector2Array(0, -7, 62, 23, 68, 81, 21, 111, -22, 64, -20, 4)
 
-[node name="trees6" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=1246074617]
+[node name="trees6" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=1384320366]
 position = Vector2(1855, 778)
 polygon = PackedVector2Array(0, -7, 62, 23, 68, 81, 21, 111, -22, 64, -20, 4)
 
-[node name="trees7" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=1451148959]
+[node name="trees7" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=334928146]
 position = Vector2(361, 450)
-polygon = PackedVector2Array(0, -7, 62, 23, 68, 81, 21, 111, -22, 64, -20, 4)
+polygon = PackedVector2Array(23, 18, 48, 27, 60, 36, 58, 53, 49, 73, 40, 89, 20, 95, 11, 94, -5, 77, -13, 58, -5, 32, 8, 20)
 
-[node name="parkedcar" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=497572652]
+[node name="parkedcar" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=695358273]
 position = Vector2(1318, 427)
-polygon = PackedVector2Array(4, 1, 72, 1, 75, 89, -5, 87)
+polygon = PackedVector2Array(23, 5, 52, 6, 57, 18, 58, 31, 57, 76, 41, 78, 20, 78, 20, 37, 18, 17)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=1875422694]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=948189293]
 position = Vector2(270, 440)
 polygon = PackedVector2Array(1, -2, 20, 8, 12, 26, 1, 16, 6, 3)
 
-[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=1242018699]
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=1306821044]
 position = Vector2(645, 436)
 polygon = PackedVector2Array(1, -2, 20, 8, 12, 26, 1, 16, 6, 3)
 
-[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=1035404240]
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=1558784260]
 position = Vector2(814, 440)
 polygon = PackedVector2Array(1, -2, 20, 8, 12, 26, 1, 16, 6, 3)
 
-[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=2107229436]
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=2133188582]
 position = Vector2(809, 628)
 polygon = PackedVector2Array(1, -2, 20, 8, 12, 26, 1, 16, 6, 3)
 
-[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=123495091]
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=1709584645]
 position = Vector2(504, 862)
 polygon = PackedVector2Array(1, -2, 20, 8, 12, 26, 1, 16, 6, 3)
 
-[node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=140393251]
+[node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=41517765]
 position = Vector2(688, 858)
 polygon = PackedVector2Array(1, -2, 20, 8, 12, 26, 1, 16, 6, 3)
 
-[node name="CollisionPolygon2D7" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=1248457268]
+[node name="CollisionPolygon2D7" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=1386638181]
 position = Vector2(872, 851)
 polygon = PackedVector2Array(1, -2, 20, 8, 12, 26, 1, 16, 6, 3)
 
-[node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=495950662]
+[node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=1793396346]
 position = Vector2(867, 775)
 polygon = PackedVector2Array(1, -2, 20, 8, 12, 26, 1, 16, 6, 3)
 
-[node name="CollisionPolygon2D9" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=641529162]
+[node name="CollisionPolygon2D9" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=637640978]
 position = Vector2(1032, 784)
 polygon = PackedVector2Array(1, -2, 20, 8, 12, 26, 1, 16, 6, 3)
 
-[node name="CollisionPolygon2D10" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=203378177]
+[node name="CollisionPolygon2D10" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=64892472]
 position = Vector2(1032, 844)
 polygon = PackedVector2Array(1, -2, 20, 8, 12, 26, 1, 16, 6, 3)
 
-[node name="CollisionPolygon2D11" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=1284704116]
+[node name="CollisionPolygon2D11" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=1468266419]
 position = Vector2(1083, 626)
 polygon = PackedVector2Array(1, -2, 20, 8, 12, 26, 1, 16, 6, 3)
 
-[node name="CollisionPolygon2D12" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=349039144]
-position = Vector2(1079, 436)
+[node name="CollisionPolygon2D12" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=109072690]
+position = Vector2(1084, 443)
 polygon = PackedVector2Array(1, -2, 20, 8, 12, 26, 1, 16, 6, 3)
 
-[node name="CollisionPolygon2D13" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=375260458]
+[node name="CollisionPolygon2D13" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=1231141043]
 position = Vector2(1643, 474)
 polygon = PackedVector2Array(1, -2, 20, 8, 12, 26, 1, 16, 6, 3)
 
-[node name="CollisionPolygon2D14" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=1905558318]
+[node name="CollisionPolygon2D14" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=2059489415]
 position = Vector2(1635, 204)
 polygon = PackedVector2Array(1, -2, 20, 8, 12, 26, 1, 16, 6, 3)
 
-[node name="CollisionPolygon2D15" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=10539694]
+[node name="CollisionPolygon2D15" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=976451806]
 position = Vector2(1039, 198)
-polygon = PackedVector2Array(1, -2, 20, 8, 12, 26, 1, 16, 6, 3)
+polygon = PackedVector2Array(5, 7, 13, 12, 16, 19, 12, 26, 3, 27, 0, 19, 2, 13)
 
-[node name="CollisionPolygon2D16" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=42501917]
+[node name="CollisionPolygon2D16" type="CollisionPolygon2D" parent="WorldCollisions" unique_id=1578892361]
 position = Vector2(1631, 639)
 polygon = PackedVector2Array(1, -2, 20, 8, 12, 26, 1, 16, 6, 3)
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1753498269]
+script = ExtResource("14_264po")
 
 [node name="SpeedMeter" type="ProgressBar" parent="HUD" unique_id=1409955394]
-offset_left = 28.0
-offset_top = 1014.0
-offset_right = 473.0
-offset_bottom = 1057.0
+offset_left = 60.0
+offset_top = 971.0
+offset_right = 505.0
+offset_bottom = 1014.0
 theme_override_styles/background = SubResource("StyleBoxFlat_6vjhb")
 theme_override_styles/fill = SubResource("StyleBoxFlat_w20yl")
 value = 100.0
 show_percentage = false
 
+[node name="Label" type="Label" parent="HUD/SpeedMeter" unique_id=1731453550]
+layout_mode = 0
+offset_left = -37.0
+offset_top = -37.0
+offset_right = 116.0
+offset_bottom = -14.0
+theme_override_fonts/font = ExtResource("17_qnb83")
+theme_override_font_sizes/font_size = 20
+text = "Speed Meter: "
+
 [node name="BoxCountFrame" type="TextureRect" parent="HUD" unique_id=1859350684]
 offset_left = 52.0
-offset_top = 39.0
+offset_top = 32.0
 offset_right = 302.0
-offset_bottom = 144.0
+offset_bottom = 137.0
 texture = ExtResource("14_trtic")
 
 [node name="BoxCountText" type="Label" parent="HUD/BoxCountFrame" unique_id=226768071]
 layout_mode = 0
 offset_left = 114.0
-offset_top = 26.0
-offset_right = 175.0
-offset_bottom = 81.0
+offset_top = 29.0
+offset_right = 184.0
+offset_bottom = 84.0
+theme_override_fonts/font = ExtResource("17_qnb83")
 theme_override_font_sizes/font_size = 40
 text = "0/3"
 
 [node name="TimerFrame" type="TextureRect" parent="HUD" unique_id=2081088866]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 723.0
+offset_top = 13.0
+offset_right = 1173.0
+offset_bottom = 169.0
+texture = ExtResource("15_ir15t")
+
+[node name="TimerText" type="Label" parent="HUD/TimerFrame" unique_id=2142046748]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 42.0
+offset_right = 383.0
+offset_bottom = 151.0
+theme_override_fonts/font = ExtResource("17_qnb83")
+theme_override_font_sizes/font_size = 60
+text = "00:00
+"
+
+[node name="PhoneIcon" type="AnimatedSprite2D" parent="HUD" unique_id=1228436]
+position = Vector2(1801.0001, 921)
+scale = Vector2(3.3437486, 3.8124993)
+sprite_frames = SubResource("SpriteFrames_8ubcx")
+animation = &"vibrating"
+autoplay = "idle"
+
+[node name="StarContainer" type="HBoxContainer" parent="HUD" unique_id=414872761]
+offset_left = 53.0
+offset_top = 160.0
+offset_right = 331.0
+offset_bottom = 250.0
+
+[node name="TextureRect" type="TextureRect" parent="HUD/StarContainer" unique_id=1836807424]
+layout_mode = 2
+texture = ExtResource("19_37s47")
+expand_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="HUD/StarContainer" unique_id=1183930842]
+layout_mode = 2
+texture = ExtResource("19_37s47")
+expand_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="HUD/StarContainer" unique_id=2006338577]
+layout_mode = 2
+texture = ExtResource("19_37s47")
+expand_mode = 2
+
+[node name="PauseButton" type="Button" parent="HUD" unique_id=1938930144]
+offset_left = 1819.0
+offset_top = 40.0
+offset_right = 1879.0
+offset_bottom = 105.0
+theme_override_fonts/font = ExtResource("17_qnb83")
+theme_override_font_sizes/font_size = 40
+text = "ll"
+
+[node name="PauseMenu" type="Panel" parent="HUD" unique_id=692588719]
+process_mode = 3
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -297.75
+offset_top = -108.75
+offset_right = 297.75
+offset_bottom = 62.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/PauseMenu" unique_id=883762775]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -252.0
+offset_top = -62.0
+offset_right = 252.0
+offset_bottom = 62.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ContinueButton" type="Button" parent="HUD/PauseMenu/VBoxContainer" unique_id=1388581282]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("17_qnb83")
+text = "Continue "
+
+[node name="RestartButton" type="Button" parent="HUD/PauseMenu/VBoxContainer" unique_id=1645980582]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("17_qnb83")
+text = "Restart
+"
+
+[node name="ExitButton" type="Button" parent="HUD/PauseMenu/VBoxContainer" unique_id=331869777]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("17_qnb83")
+text = "Exit Game
+
+"
+
+[node name="PhoneUI" type="Control" parent="HUD" unique_id=1725938605]
+visible = false
+layout_mode = 3
+anchor_bottom = 0.019000001
+offset_left = 800.0
+offset_top = 327.0
+offset_right = 1174.0
+offset_bottom = 777.48
+
+[node name="PhoneBackground" type="TextureRect" parent="HUD/PhoneUI" unique_id=853142555]
+layout_mode = 0
+offset_left = -207.0
+offset_top = -118.0
+offset_right = 626.0
+offset_bottom = 767.0
+texture = ExtResource("20_e1j6l")
+
+[node name="PickupLabel" type="Label" parent="HUD/PhoneUI/PhoneBackground" unique_id=759365543]
+layout_mode = 0
+offset_left = 262.0
+offset_top = 251.0
+offset_right = 345.0
+offset_bottom = 287.0
+theme_override_fonts/font = ExtResource("17_qnb83")
+text = "Pickup"
+
+[node name="DropoffLabel" type="Label" parent="HUD/PhoneUI/PhoneBackground" unique_id=1819017204]
+layout_mode = 0
+offset_left = 261.0
+offset_top = 283.0
+offset_right = 344.0
+offset_bottom = 320.0
+theme_override_fonts/font = ExtResource("17_qnb83")
+text = "Dropoff"
+
+[node name="RewardLabel" type="Label" parent="HUD/PhoneUI/PhoneBackground" unique_id=1831357642]
+layout_mode = 0
+offset_left = 261.0
+offset_top = 319.0
+offset_right = 344.0
+offset_bottom = 368.0
+theme_override_fonts/font = ExtResource("17_qnb83")
+text = "Reward
+"
+
+[node name="NameLabel" type="Label" parent="HUD/PhoneUI/PhoneBackground" unique_id=1544041371]
+layout_mode = 0
+offset_left = 264.0
+offset_top = 190.0
+offset_right = 347.0
+offset_bottom = 239.0
+theme_override_fonts/font = ExtResource("17_qnb83")
+text = "Name"
+
+[node name="PackageLabel" type="Label" parent="HUD/PhoneUI/PhoneBackground" unique_id=799165942]
+layout_mode = 0
+offset_left = 263.0
+offset_top = 219.0
+offset_right = 346.0
+offset_bottom = 268.0
+theme_override_fonts/font = ExtResource("17_qnb83")
+text = "Package"
+
+[node name="InstructionLabel" type="Label" parent="HUD/PhoneUI/PhoneBackground" unique_id=979371707]
+layout_mode = 0
+offset_left = 306.0
+offset_top = 388.0
+offset_right = 466.0
+offset_bottom = 411.0
+theme_override_fonts/font = ExtResource("17_qnb83")
+text = "Press F to Accept"
+
+[node name="CloseLabel" type="Label" parent="HUD/PhoneUI/PhoneBackground" unique_id=665867388]
+layout_mode = 0
+offset_left = 292.0
+offset_top = 524.0
+offset_right = 499.0
+offset_bottom = 547.0
+theme_override_fonts/font = ExtResource("17_qnb83")
+text = "Press R to close phone"
+
+[node name="ParkedBike" type="Area2D" parent="." unique_id=1334609917]
+script = ExtResource("20_5newe")
+
+[node name="Sprite2D" type="Sprite2D" parent="ParkedBike" unique_id=1290013543]
+position = Vector2(421.10202, 256.8817)
+rotation = 1.5838516
+scale = Vector2(1.1512531, 1.3774458)
+texture = ExtResource("21_37s47")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ParkedBike" unique_id=833850308]
+position = Vector2(422.00003, 256.00003)
+rotation = 1.5488247
+shape = SubResource("CapsuleShape2D_qnb83")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="ParkedBike" unique_id=460160550]
+position = Vector2(422, 256)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ParkedBike/StaticBody2D" unique_id=2008668188]
+position = Vector2(-1.5, 0)
+shape = SubResource("RectangleShape2D_hoswr")
+debug_color = Color(0.4476328, 0.5290631, 0.7445798, 0.41960785)
+
+[node name="Player" parent="." unique_id=1198177576 instance=ExtResource("22_37s47")]
+position = Vector2(278, 265)
+
+[node name="DeliveryManager" type="Node" parent="." unique_id=241728257]
+script = ExtResource("23_bt5mj")
+
+[node name="OrderTimer" type="Timer" parent="DeliveryManager" unique_id=1845975786]
+wait_time = 5.0
+one_shot = true
+
+[node name="WorldLife" type="Node2D" parent="." unique_id=1878925001]
+script = ExtResource("99_wlife")
+
+[connection signal="body_entered" from="ParkedBike" to="ParkedBike" method="_on_body_entered"]
+[connection signal="body_exited" from="ParkedBike" to="ParkedBike" method="_on_body_exited"]
+[connection signal="timeout" from="DeliveryManager/OrderTimer" to="DeliveryManager" method="_on_order_timer_timeout"]
