@@ -97,15 +97,6 @@ delivery-dash-game/
 2. Open Godot, click **Import**, and select the `project.godot` file.
 3. Press **F5** to play.
 
----
-
-## 🚀 Web Export (for developers)
-
-The online build was exported from Godot using the **Web** preset:
-
-1. In Godot, go to **Project → Export → Add… → Web**.
-2. Click **Export Project** and save it as `index.html`.
-3. Upload all exported files (`index.html`, `.wasm`, `.pck`, `.js`, etc.) to your hosting service.
 
 ---
 
@@ -120,8 +111,8 @@ The online build was exported from Godot using the **Web** preset:
 
 ## 📜 License
 
-Add your license here (for example, MIT) or remove this section.
+This project is created for educational and portfolio purposes. All original code and custom assets are licensed under the MIT License.
 
 ---
 
-Made with ❤️ using Godot.
+
