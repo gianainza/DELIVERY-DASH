@@ -48,3 +48,17 @@ func start_vibration() -> void:
 
 func stop_vibration() -> void:
 	vibrate.stop()
+	
+# Keys that should NOT click. Remove a line to make that key click.
+const SKIP_ACTIONS := ["move_up", "move_down", "move_left", "move_right", "boost"]
+
+# Click when a key from the Input Map is pressed (includes F for hopping on the bike)
+func _input(event: InputEvent) -> void:
+	if not (event is InputEventKey) or not event.pressed or event.echo:
+		return
+	for action in InputMap.get_actions():
+		if action.begins_with("ui_") or action in SKIP_ACTIONS:
+			continue
+		if event.is_action_pressed(action):
+			play_click()
+			return
